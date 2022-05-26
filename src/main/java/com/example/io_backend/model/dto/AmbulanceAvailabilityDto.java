@@ -14,7 +14,7 @@ import java.time.LocalDate;
 @Setter
 @Builder
 public class AmbulanceAvailabilityDto {
-    @NotNull(message = "Ambulance availability is null")
+    @NotNull
     AvailabilityType availabilityType;
     @DateTimeFormat(pattern = "dd.MM.yyyy")
     LocalDate since;

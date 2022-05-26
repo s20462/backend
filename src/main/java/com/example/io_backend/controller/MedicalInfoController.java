@@ -1,8 +1,7 @@
 package com.example.io_backend.controller;
 
-import com.example.io_backend.dto.MedicalInfoDto;
+import com.example.io_backend.model.dto.MedicalInfoDto;
 import com.example.io_backend.model.MedicalInfo;
-import com.example.io_backend.model.enums.BloodType;
 import com.example.io_backend.service.MedicalInfoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

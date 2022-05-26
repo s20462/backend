@@ -1,6 +1,6 @@
 package com.example.io_backend.model.dto.response;
 
-import com.example.io_backend.dto.UserDto;
+import com.example.io_backend.model.dto.UserDto;
 import com.example.io_backend.model.enums.BloodType;
 import lombok.*;
 
