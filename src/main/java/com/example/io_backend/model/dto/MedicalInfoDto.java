@@ -1,4 +1,4 @@
-package com.example.io_backend.dto;
+package com.example.io_backend.model.dto;
 
 import com.example.io_backend.model.enums.BloodType;
 import lombok.Data;

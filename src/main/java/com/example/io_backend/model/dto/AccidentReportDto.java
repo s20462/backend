@@ -1,4 +1,4 @@
-package com.example.io_backend.dto;
+package com.example.io_backend.model.dto;
 
 import com.example.io_backend.model.Ambulance;
 import com.example.io_backend.model.ReportSurvey;

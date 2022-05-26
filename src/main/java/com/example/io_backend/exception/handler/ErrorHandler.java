@@ -1,7 +1,12 @@
-package com.example.io_backend.exception;
+package com.example.io_backend.exception.handler;
 
 
+import com.example.io_backend.exception.BadRequestException;
+import com.example.io_backend.exception.GarryException;
+import com.example.io_backend.exception.InternalServerErrorException;
+import com.example.io_backend.exception.NotFoundException;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -12,6 +17,15 @@ import java.util.Map;
 @RestControllerAdvice
 public class ErrorHandler {
     private final Map<String, Object> errorMsg = new LinkedHashMap<>();
+
+    @ExceptionHandler(GarryException.class)
+    public ResponseEntity<Object> handleError(GarryException e) {
+        Map<String, Object> errors = new LinkedHashMap<>();
+        errors.put("status", e.getStatus());
+        errors.put("msg", e.getMessage());
+
+        return new ResponseEntity<>(errors, (HttpStatus)errors.get("status"));
+    }
 
     @ExceptionHandler(BadRequestException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)

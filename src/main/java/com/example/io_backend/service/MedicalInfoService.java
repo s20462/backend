@@ -1,6 +1,6 @@
 package com.example.io_backend.service;
 
-import com.example.io_backend.dto.MedicalInfoDto;
+import com.example.io_backend.model.dto.MedicalInfoDto;
 import com.example.io_backend.exception.NotFoundException;
 import com.example.io_backend.model.MedicalInfo;
 import com.example.io_backend.model.enums.BloodType;
