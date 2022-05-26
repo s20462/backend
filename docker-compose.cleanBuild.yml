@@ -1,14 +1,5 @@
 version: '3.3'
 services:
-  keycloak:
-    container_name: "keycloak"
-    image: quay.io/keycloak/keycloak:17.0.1
-    environment:
-      - KEYCLOAK_ADMIN=admin
-      - KEYCLOAK_ADMIN_PASSWORD=admin
-    ports:
-      - "8081:8081"
-
   database:
     container_name: "io-db"
     image: mysql:8.0
@@ -69,7 +60,6 @@ services:
       - "8080:8080"
     depends_on:
       - database
-      - keycloak
     links:
       - database
     restart: on-failure
