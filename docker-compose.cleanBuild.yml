@@ -7,12 +7,34 @@ services:
       - backend_network
     environment:
       - MYSQL_ROOT_PASSWORD=123
-      - MYSQL_USER=test
-      - MYSQL_PASSWORD=password
+      - MYSQL_ROOT_PASSWORD=password
     ports:
       - "3306:3306"
     volumes:
       - ./db-schema:/docker-entrypoint-initdb.d
+
+  keycloak:
+    container_name: "io-keycloak"
+    image: quay.io/keycloak/keycloak:18.0.0
+    networks:
+      - backend_network
+    environment:
+      - KEYCLOAK_ADMIN=admin
+      - KEYCLOAK_ADMIN_PASSWORD=admin
+    ports:
+      - "8081:8080"
+    command:
+      - "start-dev"
+      - "-Dkeycloak.migration.action=import"
+      - "-Dkeycloak.migration.provider=singleFile"
+      - "-Dkeycloak.migration.strategy=OVERWRITE_EXISTING"
+      - "-Dkeycloak.migration.file=/tmp/realm-export.json"
+    volumes:
+      - type: bind
+        source: ./realm-export.json
+        target: /tmp/realm-export.json
+        read_only: true
+    restart: on-failure
 
   backend:
     container_name: "io-backend"
@@ -22,8 +44,17 @@ services:
     networks:
       - backend_network
     environment:
+      - SQL_URL=jdbc:mysql://database:3306/test_db
       - SQL_USER=root
-      - SQL_PASSWORD=123
+      - SQL_PASSWORD=password
+      - SQL_DRIVER=com.mysql.jdbc.Driver
+      - SQL_SHOW=false
+      - KEYCLOAK_EMBEDDED=false
+      - KEYCLOAK_URL=http://io-keycloak:8080
+      - KEYCLOAK_REALM=dev
+      - KEYCLOAK_RESOURCE=backend
+      - KEYCLOAK_CLIENTID=backend
+      - KEYCLOAK_SECRET=develOnly!
     image: pjatk/io_backend:latest
     ports:
       - "8080:8080"
