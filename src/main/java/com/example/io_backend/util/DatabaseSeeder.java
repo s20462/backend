@@ -47,9 +47,9 @@ public class DatabaseSeeder implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments args) {
         seedUsers();
-      //if (args.getNonOptionArgs().contains("seed")) {
+      if (args.getNonOptionArgs().contains("seed")) {
           seedDatabase();
-      //} else log.info("Database seeding not enabled");
+      } else log.info("Database seeding not enabled");
     }
 
     private void seedUsers() {
@@ -86,8 +86,6 @@ public class DatabaseSeeder implements ApplicationRunner {
     private void seedDatabase() {
         allergyRepository.saveAll(generateAllergies(entitiesToGenerate));
         medicalInfoRepository.saveAll(generateMedicalInfos(entitiesToGenerate));
-        userRepository.saveAll(generateUsers(entitiesToGenerate));
-        staffRepository.saveAll(generateStaff(entitiesToGenerate));
         victimRepository.saveAll(generateVictims(entitiesToGenerate));
         ambulanceRepository.saveAll(generateAmbulances(entitiesToGenerate));
         tutorialRepository.saveAll(generateTutorials(entitiesToGenerate));
@@ -135,41 +133,6 @@ public class DatabaseSeeder implements ApplicationRunner {
         }
 
         return medicalInfos;
-    }
-
-    private List<User> generateUsers(int length) {
-        List<User> users = new ArrayList<>();
-        List<MedicalInfo> medicalInfos = medicalInfoRepository.findAll();
-
-        for (int i = 0; i < length; i++) {
-            User user = new User();
-            user.setId(null);
-            user.setBirthDate(LocalDate.of(2000, 1, 1));
-            user.setBandCode(UUID.randomUUID().toString());
-            user.setFirstName(names.get(ThreadLocalRandom.current().nextInt(names.size())).split(" ")[0]);
-            user.setLastName(names.get(ThreadLocalRandom.current().nextInt(names.size())).split(" ")[1]);
-            user.setMedicalInfo(medicalInfos.get(ThreadLocalRandom.current().nextInt(medicalInfos.size())));
-            user.setPhone(String.format("%09d", ThreadLocalRandom.current().nextInt(1000000000)));
-
-            users.add(user);
-        }
-
-        return users;
-    }
-
-    private List<Staff> generateStaff(int length) {
-        List<Staff> staffList = new ArrayList<>();
-
-        for (int i = 0; i < length; i++) {
-            Staff staff = new Staff();
-            staff.setId(null);
-            staff.setStaffType(EnumUtils.randomValue(StaffType.class));
-
-
-            staffList.add(staff);
-        }
-
-        return staffList;
     }
 
     private List<Victim> generateVictims(int length) {
