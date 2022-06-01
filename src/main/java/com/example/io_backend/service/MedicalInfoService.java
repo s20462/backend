@@ -1,7 +1,11 @@
 package com.example.io_backend.service;
 
+import com.example.io_backend.dto.AllergiesDto;
+import com.example.io_backend.dto.BloodTypeDto;
+import com.example.io_backend.dto.ChronicDiseaseDto;
 import com.example.io_backend.dto.MedicalInfoDto;
 import com.example.io_backend.exception.NotFoundException;
+import com.example.io_backend.model.Allergy;
 import com.example.io_backend.model.MedicalInfo;
 import com.example.io_backend.model.enums.BloodType;
 import com.example.io_backend.repository.MedicalInfoRepository;
@@ -9,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -46,23 +51,24 @@ public class MedicalInfoService {
         medicalInfoRepository.delete(m);
     }
 
-    public MedicalInfoDto updateBloodType(Long medicalInfoId, String bloodType) {
+    public MedicalInfoDto updateBloodType(Long medicalInfoId, BloodTypeDto bloodType) {
         MedicalInfo medicalInfo = this.getMedicalInfoById(medicalInfoId);
-        medicalInfo.setBloodType(BloodType.valueOf(bloodType.toUpperCase()));
+        medicalInfo.setBloodType(bloodType.getBloodType());
         medicalInfoRepository.save(medicalInfo);
         return modelMapper.map(medicalInfo,MedicalInfoDto.class);
     }
 
-    public MedicalInfoDto updateChronicDiseases(Long medicalInfoId, String chronicDiseases) {
+    public MedicalInfoDto updateChronicDiseases(Long medicalInfoId, ChronicDiseaseDto chronicDiseases) {
         MedicalInfo medicalInfo = this.getMedicalInfoById(medicalInfoId);
-        medicalInfo.setChronicDiseases(chronicDiseases);
+        medicalInfo.setChronicDiseases(chronicDiseases.getChronicDisease());
         medicalInfoRepository.save(medicalInfo);
         return modelMapper.map(medicalInfo,MedicalInfoDto.class);
     }
 
-    public MedicalInfoDto updateAllergies(Long medicalInfoId, String allergies) {
+    public MedicalInfoDto updateAllergies(Long medicalInfoId, AllergiesDto... allergies) {
+        List<AllergiesDto> allergiesDtoToList = Arrays.asList(allergies);
         MedicalInfo medicalInfo = this.getMedicalInfoById(medicalInfoId);
-        medicalInfo.setAllergies(allergies);
+        medicalInfo.setAllergies(Arrays.asList(modelMapper.map(allergiesDtoToList,Allergy[].class)));
         medicalInfoRepository.save(medicalInfo);
         return modelMapper.map(medicalInfo,MedicalInfoDto.class);
     }

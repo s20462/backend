@@ -125,7 +125,11 @@ public class KeycloakService {
                 throw new RuntimeException("Cannot fetch roles");
             }
             List<RoleRepresentation> roles = Arrays.asList(Objects.requireNonNull(roleResponse.getBody()));
-            RoleRepresentation role = roles.stream().filter(x -> x.getName().equalsIgnoreCase(createStaffUserRequest.getStaffType().name())).toList().get(0);
+            List<RoleRepresentation> roleList = roles.stream().filter(x -> x.getName().equalsIgnoreCase(createStaffUserRequest.getStaffType().name())).toList();
+            if (roleList.size() < 1) {
+                throw new InternalServerErrorException("Role: " + createStaffUserRequest.getStaffType() + " is not on KC auth server!");
+            }
+            RoleRepresentation role = roleList.get(0);
 
             AuthAssignRoleRequest roleRequest = new AuthAssignRoleRequest();
             roleRequest.setRoleId(role.getId());

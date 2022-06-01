@@ -4,6 +4,7 @@ import com.example.io_backend.model.enums.BloodType;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Builder
 @AllArgsConstructor
@@ -22,10 +23,14 @@ public class MedicalInfo {
     @Column(name = "blood_type")
     private BloodType bloodType;
 
+    @ElementCollection
     @Column(name = "chronic_diseases")
-    private String chronicDiseases;
+    private List<String> chronicDiseases;
 
-    @Column(name = "allergies")
-    private String allergies;
+    @ManyToMany
+    @JoinTable(name = "allergies",
+            joinColumns = @JoinColumn(name = "medical_info_id"),
+            inverseJoinColumns = @JoinColumn(name = "allergies_id"))
+    private List<Allergy> allergies;
 
 }
