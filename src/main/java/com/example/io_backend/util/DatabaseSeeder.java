@@ -23,6 +23,7 @@ import java.util.stream.Collectors;
 @Slf4j
 public class DatabaseSeeder implements ApplicationRunner {
     private final UserRepository userRepository;
+    private final AllergyRepository allergyRepository;
     private final MedicalInfoRepository medicalInfoRepository;
     private final StaffRepository staffRepository;
     private final VictimRepository victimRepository;
@@ -46,9 +47,9 @@ public class DatabaseSeeder implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments args) {
         seedUsers();
-      if (args.getNonOptionArgs().contains("seed")) {
+      //if (args.getNonOptionArgs().contains("seed")) {
           seedDatabase();
-      } else log.info("Database seeding not enabled");
+      //} else log.info("Database seeding not enabled");
     }
 
     private void seedUsers() {
@@ -83,9 +84,10 @@ public class DatabaseSeeder implements ApplicationRunner {
     }
 
     private void seedDatabase() {
+        allergyRepository.saveAll(generateAllergies(entitiesToGenerate));
         medicalInfoRepository.saveAll(generateMedicalInfos(entitiesToGenerate));
-        //userRepository.saveAll(generateUsers(entitiesToGenerate));
-        //staffRepository.saveAll(generateStaff(entitiesToGenerate));
+        userRepository.saveAll(generateUsers(entitiesToGenerate));
+        staffRepository.saveAll(generateStaff(entitiesToGenerate));
         victimRepository.saveAll(generateVictims(entitiesToGenerate));
         ambulanceRepository.saveAll(generateAmbulances(entitiesToGenerate));
         tutorialRepository.saveAll(generateTutorials(entitiesToGenerate));
@@ -102,15 +104,31 @@ public class DatabaseSeeder implements ApplicationRunner {
 
         log.info("Database seeding finished");
     }
+    private List<Allergy> generateAllergies(int length) {
+        List<Allergy> allergies = new ArrayList<>();
+        for (int i = 0; i < length; i++) {
+            Allergy a = new Allergy();
+            a.setId(null);
+            a.setAllergyType(EnumUtils.randomValue(AllergyType.class));
+            a.setAllergyName("");
+            a.setAdditionalInfo("");
+
+            allergies.add(a);
+        }
+        return  allergies;
+    }
 
     private List<MedicalInfo> generateMedicalInfos(int length) {
         List<MedicalInfo> medicalInfos = new ArrayList<>();
+        List<Allergy> allergies = allergyRepository.findAll();
 
         for (int i = 0; i < length; i++) {
             MedicalInfo medicalInfo = new MedicalInfo();
-            medicalInfo.setAllergies(allergies.get(ThreadLocalRandom.current().nextInt(allergies.size())));
+            medicalInfo.setAllergies(allergies.stream()
+                    .limit(ThreadLocalRandom.current().nextInt(allergies.size() - (entitiesToGenerate / 2)))
+                    .collect(Collectors.toList()));
             medicalInfo.setBloodType(EnumUtils.randomValue(BloodType.class));
-            medicalInfo.setChronicDiseases(chronicDiseases.get(ThreadLocalRandom.current().nextInt(chronicDiseases.size())));
+            medicalInfo.setChronicDiseases(chronicDiseases);
             medicalInfo.setId(null);
 
             medicalInfos.add(medicalInfo);
@@ -388,6 +406,7 @@ public class DatabaseSeeder implements ApplicationRunner {
 
         return equipmentLogs;
     }
+
 
     private final List<String> chronicDiseases = List.of(
             "ASTMA",

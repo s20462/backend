@@ -1,5 +1,8 @@
 package com.example.io_backend.controller;
 
+import com.example.io_backend.dto.AllergiesDto;
+import com.example.io_backend.dto.BloodTypeDto;
+import com.example.io_backend.dto.ChronicDiseaseDto;
 import com.example.io_backend.dto.MedicalInfoDto;
 import com.example.io_backend.model.MedicalInfo;
 import com.example.io_backend.model.enums.BloodType;
@@ -44,17 +47,17 @@ public class MedicalInfoController {
     }
 
     @PutMapping("/blood/{id}")
-    public ResponseEntity<MedicalInfoDto> updateBloodtype(@PathVariable Long id, @RequestBody String bloodType) {
+    public ResponseEntity<MedicalInfoDto> updateBloodtype(@PathVariable Long id, @RequestBody BloodTypeDto bloodType) {
         return new ResponseEntity<>(medicalInfoService.updateBloodType(id, bloodType), HttpStatus.OK);
     }
 
     @PutMapping("/chronic/{id}")
-    public ResponseEntity<MedicalInfoDto> updateChronicDisease(@PathVariable Long id,@RequestBody String chronicDisease) {
+    public ResponseEntity<MedicalInfoDto> updateChronicDisease(@PathVariable Long id,@RequestBody ChronicDiseaseDto chronicDisease) {
         return  new ResponseEntity<>(medicalInfoService.updateChronicDiseases(id, chronicDisease),HttpStatus.OK);
     }
 
     @PutMapping("/allergies/{id}")
-    public ResponseEntity<MedicalInfoDto> updateAllergies(@PathVariable Long id,@RequestBody String allergies) {
+    public ResponseEntity<MedicalInfoDto> updateAllergies(@PathVariable Long id,@RequestBody AllergiesDto ... allergies) {
         return new ResponseEntity<>(medicalInfoService.updateAllergies(id, allergies),HttpStatus.OK);
     }
 

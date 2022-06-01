@@ -6,6 +6,7 @@ import lombok.*;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.UUID;
 
 @Builder
 @AllArgsConstructor
@@ -17,7 +18,7 @@ import java.util.Date;
 public class User {
     @Id
     @Column(name = "id")
-    private String id;
+    private UUID id;
 
     @Column(name = "firstname")
     private String firstName;
