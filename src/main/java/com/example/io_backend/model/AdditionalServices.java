@@ -15,7 +15,7 @@ import java.util.Date;
 public class AdditionalServices {
     @Id
     @Column(name = "id", nullable = false)
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Enumerated

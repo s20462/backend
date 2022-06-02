@@ -15,5 +15,6 @@ import java.util.List;
 @NoArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class EquipmentResponse {
+    Long id;
     String name;
 }

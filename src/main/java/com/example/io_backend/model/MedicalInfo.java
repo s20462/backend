@@ -15,7 +15,7 @@ import javax.persistence.*;
 public class MedicalInfo {
     @Id
     @Column(name = "id", nullable = false)
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Enumerated(EnumType.STRING)

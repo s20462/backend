@@ -17,7 +17,7 @@ import java.util.Date;
 public class AmbulanceAvailability {
     @Id
     @Column(name = "id", nullable = false)
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne

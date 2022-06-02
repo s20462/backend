@@ -16,7 +16,7 @@ import java.util.List;
 public class ReportSurvey {
     @Id
     @Column(name = "id", nullable = false)
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "victim_breathing")

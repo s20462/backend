@@ -54,6 +54,7 @@ public class EquipmentService {
 
     private EquipmentResponse mapToResponse(Equipment equipment) {
         EquipmentResponse eq = new EquipmentResponse();
+        eq.setId(equipment.getId());
         eq.setName(equipment.getName());
 
         return eq;

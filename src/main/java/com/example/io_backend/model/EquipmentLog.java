@@ -14,7 +14,7 @@ import java.util.Date;
 public class EquipmentLog {
     @Id
     @Column(name = "id", nullable = false)
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne
