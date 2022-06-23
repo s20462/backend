@@ -6,14 +6,14 @@ import com.example.io_backend.model.Staff;
 import com.example.io_backend.model.User;
 import lombok.Data;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.Set;
 
 @Data
 public class AccidentReportDto {
-    private Long id;
+    private Integer id;
     private Short dangerRating;
-    private Date date;
+    private LocalDate date;
     private Boolean closed;
     private Staff staff;
     private User user;

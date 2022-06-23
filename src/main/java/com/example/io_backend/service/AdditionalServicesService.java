@@ -18,7 +18,7 @@ public class AdditionalServicesService {
         return additionalServicesRepository.findAll();
     }
 
-    public AdditionalServices getAdditionalServicesById(Long id){
+    public AdditionalServices getAdditionalServicesById(Integer id){
         return additionalServicesRepository.findById(id).orElseThrow(()-> new NotFoundException("No record with that ID"));
     }
 
@@ -26,7 +26,7 @@ public class AdditionalServicesService {
         return additionalServicesRepository.save(additionalServices);
     }
 
-    public void updateAdditionalServices(AdditionalServices additionalServices, Long id) {
+    public void updateAdditionalServices(AdditionalServices additionalServices, Integer id) {
         var a = additionalServicesRepository.findById(id).orElseThrow(()-> new NotFoundException("No record with that ID"));
 
         a.setId(additionalServices.getId());
@@ -37,7 +37,7 @@ public class AdditionalServicesService {
         additionalServicesRepository.save(a);
     }
 
-    public void deleteAdditionalServices(Long id) {
+    public void deleteAdditionalServices(Integer id) {
         var a = additionalServicesRepository.findById(id).orElseThrow(()-> new NotFoundException("No record with that ID"));
 
         additionalServicesRepository.delete(a);

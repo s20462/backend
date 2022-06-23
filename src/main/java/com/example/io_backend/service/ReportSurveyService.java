@@ -18,14 +18,14 @@ public class ReportSurveyService {
         return reportSurveyRepository.findAll();
     }
 
-    public ReportSurvey getSurveysReportById(Long id){
+    public ReportSurvey getSurveysReportById(Integer id){
         return reportSurveyRepository.findById(id).orElseThrow(() -> new NotFoundException("No record with that id"));
     }
 
     public ReportSurvey addReportSurvay(ReportSurvey reportSurvey){
         return reportSurveyRepository.save(reportSurvey);
     }
-    public void updateReportSurvey(ReportSurvey reportSurvey, Long id) {
+    public void updateReportSurvey(ReportSurvey reportSurvey, Integer id) {
         var r = reportSurveyRepository.findById(id).orElseThrow(() -> new NotFoundException("Report survey Not found "));
         r.setId(reportSurvey.getId());
         r.setDate(reportSurvey.getDate());
@@ -38,7 +38,7 @@ public class ReportSurveyService {
         reportSurveyRepository.save(r);
     }
 
-    public void deleteReportSurvey(Long id){
+    public void deleteReportSurvey(Integer id){
         var r = reportSurveyRepository.findById(id).orElseThrow(() -> new NotFoundException("Report survey Not found "));
         reportSurveyRepository.delete(r);
     }

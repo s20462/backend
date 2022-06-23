@@ -30,7 +30,7 @@ public class EmergencyController {
     }
 
     @PreAuthorize("hasRole('dispositor')")
-    @Operation(summary = "Currently logged dispositor approves request of given id", security = @SecurityRequirement(name = "bearerAuth"))
+    @Operation(summary = "Currently logged dispatcher approves request of given id", security = @SecurityRequirement(name = "bearerAuth"))
     @PostMapping("/approve/{id}")
     public void approveEmergency(@RequestBody ApproveEmergencyRequest request, @PathVariable Integer id) {
         emergencyService.approveEmergency(request, id);
@@ -48,5 +48,12 @@ public class EmergencyController {
     @GetMapping("/approved")
     public ResponseEntity<List<EmergencyResponse>> getApproved() {
         return ResponseEntity.ok(emergencyService.getApproved());
+    }
+
+    @PreAuthorize("hasRole('dispositor')")
+    @Operation(summary = "Get all closed emergency reports", security = @SecurityRequirement(name = "bearerAuth"))
+    @GetMapping("/closed")
+    public ResponseEntity<?> getClosed() {
+        return ResponseEntity.ok(emergencyService.getClosed());
     }
 }

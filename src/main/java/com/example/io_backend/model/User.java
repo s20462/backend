@@ -8,6 +8,7 @@ import java.time.LocalDate;
 import java.util.Date;
 import java.util.Set;
 
+
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -25,6 +26,9 @@ public class User {
 
     @Column(name = "lastname")
     private String lastName;
+
+    @Column(name = "username")
+    private String username;
 
     @Column(name = "birth_date")
     private LocalDate birthDate;

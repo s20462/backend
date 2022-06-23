@@ -20,7 +20,7 @@ public class EquipmentLogController {
     }
 
     @GetMapping("/{id}")
-    public EquipmentLog getById(@PathVariable Long id) {
+    public EquipmentLog getById(@PathVariable Integer id) {
         return equipmentLogService.getEquipmentLogById(id);
     }
 
@@ -30,12 +30,12 @@ public class EquipmentLogController {
     }
 
     @PutMapping("/{id}")
-    public void update(@RequestBody EquipmentLog equipmentLog, @PathVariable Long id) {
+    public void update(@RequestBody EquipmentLog equipmentLog, @PathVariable Integer id) {
         equipmentLogService.updateEquipmentLog(equipmentLog,id);
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable Long id) {
+    public void delete(@PathVariable Integer id) {
         equipmentLogService.deleteEquipmentLog(id);
     }
 }

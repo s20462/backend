@@ -5,7 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface AccidentReportRepository extends JpaRepository<AccidentReport, Long> {
+public interface AccidentReportRepository extends JpaRepository<AccidentReport, Integer> {
     List<AccidentReport> getAccidentReportByApprovedIsFalse();
     List<AccidentReport> getAccidentReportByApprovedIsTrue();
 }

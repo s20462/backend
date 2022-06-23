@@ -22,7 +22,7 @@ public class EquipmentController {
     }
 
     @GetMapping("/{id}")
-    public EquipmentResponse getById(@PathVariable Long id){
+    public EquipmentResponse getById(@PathVariable Integer id){
         return equipmentService.getEquipmentById(id);
     }
 
@@ -32,12 +32,12 @@ public class EquipmentController {
     }
 
     @PutMapping("/{id}")
-    public EquipmentResponse update(@RequestBody EquipmentDto equipment, @PathVariable Long id){
+    public EquipmentResponse update(@RequestBody EquipmentDto equipment, @PathVariable Integer id){
         return equipmentService.updateEquipment(equipment,id);
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable Long id) {
+    public void delete(@PathVariable Integer id) {
         equipmentService.deleteEquipment(id);
     }
 }

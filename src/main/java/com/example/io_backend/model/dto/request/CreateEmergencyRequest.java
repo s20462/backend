@@ -1,6 +1,8 @@
 package com.example.io_backend.model.dto.request;
 
 
+import com.example.io_backend.model.Location;
+import com.example.io_backend.model.dto.LocationDto;
 import com.example.io_backend.model.enums.BloodType;
 import lombok.Builder;
 import lombok.Getter;
@@ -14,4 +16,6 @@ public class CreateEmergencyRequest {
     private Boolean breathing;
     private Boolean conscious;
     private BloodType bloodType;
+    private String medicalBandId;
+    private LocationDto location;
 }

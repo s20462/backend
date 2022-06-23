@@ -20,7 +20,7 @@ public class AdditionalServicesController {
     }
 
     @GetMapping("{id}")
-    public AdditionalServices getById(@PathVariable Long id) {
+    public AdditionalServices getById(@PathVariable Integer id) {
         return additionalServicesService.getAdditionalServicesById(id);
     }
 
@@ -30,12 +30,12 @@ public class AdditionalServicesController {
     }
 
     @PutMapping("/{id}")
-    public void update(@RequestBody AdditionalServices additionalServices,@PathVariable Long id){
+    public void update(@RequestBody AdditionalServices additionalServices,@PathVariable Integer id){
         additionalServicesService.updateAdditionalServices(additionalServices,id);
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable Long id) {
+    public void delete(@PathVariable Integer id) {
         additionalServicesService.deleteAdditionalServices(id);
     }
 

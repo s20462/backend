@@ -16,10 +16,10 @@ public class DispositorDutyEntry {
     private Integer id;
 
     @Column(name = "duty_start")
-    private Long dutyStart;
+    private Integer dutyStart;
 
     @Column(name = "duty_end")
-    private Long dutyEnd;
+    private Integer dutyEnd;
 
     @Column(name = "comment")
     String comment;

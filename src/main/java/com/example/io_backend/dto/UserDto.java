@@ -5,7 +5,6 @@ import com.example.io_backend.model.User;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
 
-import java.util.Date;
 import java.time.LocalDate;
 
 @Getter

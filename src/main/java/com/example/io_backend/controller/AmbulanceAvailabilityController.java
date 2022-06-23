@@ -21,7 +21,7 @@ public class AmbulanceAvailabilityController {
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<AmbulanceAvailability> getById(@PathVariable Long id) {
+    public ResponseEntity<AmbulanceAvailability> getById(@PathVariable Integer id) {
         return new ResponseEntity<>(ambulanceAvailabilityService.getAmbulanceAvailabilityById(id), HttpStatus.OK);
     }
 
@@ -31,12 +31,12 @@ public class AmbulanceAvailabilityController {
     }
 
     @PutMapping("/{id}")
-    public void update(@RequestBody AmbulanceAvailability ambulanceAvailability,@PathVariable Long id){
+    public void update(@RequestBody AmbulanceAvailability ambulanceAvailability,@PathVariable Integer id){
         ambulanceAvailabilityService.updateAmbulanceAvailability(ambulanceAvailability, id);
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable Long id) {
+    public void delete(@PathVariable Integer id) {
         ambulanceAvailabilityService.deleteAmbulanceAvailability(id);
     }
 

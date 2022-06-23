@@ -5,7 +5,6 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -17,7 +16,7 @@ public class AccidentReport {
     @Id
     @Column(name = "id", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
     @Column(name = "danger_rating")
     private Short dangerRating;
@@ -38,6 +37,10 @@ public class AccidentReport {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
+
+    @OneToOne
+    @JoinColumn(name = "location_id")
+    private Location location;
 
     @ManyToMany
     @JoinTable(name = "accident_report_ambulances",

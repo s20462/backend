@@ -17,7 +17,8 @@ public class Facility {
     @Id
     @Column(name = "id", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue
+    private Integer id;
 
     @Column(name = "name")
     private String name;

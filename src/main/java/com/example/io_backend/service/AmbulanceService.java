@@ -33,7 +33,7 @@ public class AmbulanceService {
     private final EquipmentLogRepository equipmentLogRepository;
 
    @Transactional
-    public EquipmentLogResponse assignEquipment(Integer ambulanceId, Long equipmentId) { // unidirectional relations ????
+    public EquipmentLogResponse assignEquipment(Integer ambulanceId, Integer equipmentId) { // unidirectional relations ????
         Equipment eq = equipmentRepository.findById(equipmentId).orElseThrow(() -> new NotFoundException("Equipment with id: " + equipmentId + " couldn't be found"));
         Ambulance ambulance = ambulanceRepository.findById(ambulanceId).orElseThrow(() -> new NotFoundException("Ambulance with id: " + ambulanceId + " couldn't be found"));
         List<EquipmentLog> equipmentLogList = equipmentLogRepository.findAll()

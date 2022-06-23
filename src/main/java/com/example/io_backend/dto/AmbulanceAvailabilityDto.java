@@ -4,16 +4,16 @@ import com.example.io_backend.model.Ambulance;
 import com.example.io_backend.model.enums.AvailabilityType;
 import lombok.Data;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 @Data
 public class AmbulanceAvailabilityDto {
 
-    private Long id;
+    private Integer id;
     private Ambulance ambulance;
     private AvailabilityType availabilityType;
-    private Date dateStart;
-    private Date dateEnd;
+    private LocalDate dateStart;
+    private LocalDate dateEnd;
     private String details;
 
 

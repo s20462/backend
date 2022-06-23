@@ -75,6 +75,7 @@ public class KeycloakService {
                     .id(user.getId())
                     .firstName(user.getFirstName())
                     .lastName(user.getLastName())
+                    .username(user.getUserName())
                     .phone(createUserRequest.getPhoneNumber())
                     .bandCode(UUID.randomUUID().toString())
                     .birthDate(createUserRequest.getBirthDate())
@@ -147,6 +148,7 @@ public class KeycloakService {
             User newUser = new User();
             newUser.setFirstName(createStaffUserRequest.getFirstName());
             newUser.setLastName(createStaffUserRequest.getLastName());
+            newUser.setUsername(createStaffUserRequest.getUserName());
             newUser.setBirthDate(createStaffUserRequest.getBirthDate());
             newUser.setPhone(createStaffUserRequest.getPhone());
             newUser.setId(user.getId());

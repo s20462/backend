@@ -18,7 +18,7 @@ public class ReviewService {
     public List<Review> getReviews() {return reviewRepository.findAll();}
 
 
-    public Review getReviewById(Long id) {
+    public Review getReviewById(Integer id) {
         return reviewRepository.findById(id).orElseThrow(() -> new NotFoundException("No record with that id"));
     }
 
@@ -26,7 +26,7 @@ public class ReviewService {
         return reviewRepository.save(review);
     }
 
-    public void updateReview(Review review, Long id) {
+    public void updateReview(Review review, Integer id) {
         var r = reviewRepository.findById(id).orElseThrow(() -> new NotFoundException("Review not found"));
         r.setId(review.getId());
         r.setContent(review.getContent());
@@ -35,7 +35,7 @@ public class ReviewService {
 
     }
 
-    public void deleteReview(Long id) {
+    public void deleteReview(Integer id) {
         var r = reviewRepository.findById(id).orElseThrow(() -> new NotFoundException("Person not found"));
         reviewRepository.delete(r);
     }

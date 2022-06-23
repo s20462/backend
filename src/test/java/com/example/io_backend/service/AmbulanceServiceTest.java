@@ -37,7 +37,9 @@ class AmbulanceServiceTest {
 
     @Test
     void assignEquipment() {
-        Equipment eq = new Equipment(1L, "eq1");
+
+        Equipment eq = new Equipment(1, "eq1", null);
+
         Ambulance ambulance = Ambulance
                 .builder()
                 .id(1)
@@ -50,7 +52,7 @@ class AmbulanceServiceTest {
 
         EquipmentLog eqlog1 = EquipmentLog
                 .builder()
-                .id(1L)
+                .id(1)
                 .ambulance(ambulance)
                 .equipment(eq)
                 .currentAmount(10d)
@@ -62,9 +64,10 @@ class AmbulanceServiceTest {
 
         EquipmentLog eqlog2 = EquipmentLog
                 .builder()
-                .id(1L)
+                .id(1)
                 .ambulance(ambulance)
-                .equipment(new Equipment(2L, "eq2"))
+
+                .equipment(new Equipment(2, "eq2", null))
                 .currentAmount(10d)
                 .startingAmount(10d)
                 .dateStart(LocalDate.now())
@@ -72,12 +75,12 @@ class AmbulanceServiceTest {
                 .measurement("m")
                 .build();
 
-        when(equipmentRepository.findById(any(Long.class))).thenReturn(Optional.of(eq));
+        when(equipmentRepository.findById(any(Integer.class))).thenReturn(Optional.of(eq));
         when(ambulanceRepository.findById(any(Integer.class))).thenReturn(Optional.ofNullable(ambulance));
         when(equipmentLogRepository.findAll()).thenReturn(List.of(eqlog1, eqlog2));
         when(equipmentLogRepository.save(any(EquipmentLog.class))).thenAnswer(x -> x.getArguments()[0]);
 
-        var result = ambulanceService.assignEquipment(1, 1L);
+        var result = ambulanceService.assignEquipment(1, 1);
 
         assertEquals(eqlog1.getEquipment(), result.getEquipment());
         assertEquals(eqlog1.getAmbulance(), result.getAmbulance());
@@ -241,7 +244,7 @@ class AmbulanceServiceTest {
                 .dateStart(LocalDate.of(2022, 4, 21))
                 .dateEnd(LocalDate.of(2022, 4, 22))
                 .details("details")
-                .id(1L)
+                .id(1)
                 .build();
 
         AmbulanceAvailability availability2 = AmbulanceAvailability
@@ -251,7 +254,7 @@ class AmbulanceServiceTest {
                 .dateStart(LocalDate.of(2022, 4, 21))
                 .dateEnd(LocalDate.of(2022, 4, 22))
                 .details("details")
-                .id(1L)
+                .id(1)
                 .build();
 
         var expected = AmbulanceResponse.of(availability1.getAmbulance());

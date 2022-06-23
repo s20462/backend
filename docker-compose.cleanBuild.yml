@@ -7,7 +7,6 @@ services:
       - backend_network
     environment:
       - MYSQL_ROOT_PASSWORD=123
-      - MYSQL_ROOT_PASSWORD=password
     ports:
       - "3306:3306"
     volumes:
@@ -46,7 +45,7 @@ services:
     environment:
       - SQL_URL=jdbc:mysql://database:3306/test_db
       - SQL_USER=root
-      - SQL_PASSWORD=password
+      - SQL_PASSWORD=123
       - SQL_DRIVER=com.mysql.jdbc.Driver
       - SQL_SHOW=false
       - KEYCLOAK_EMBEDDED=false
@@ -60,9 +59,21 @@ services:
       - "8080:8080"
     depends_on:
       - database
+
     links:
       - database
     restart: on-failure
+
+
+  phpmyadmin:
+    image: phpmyadmin
+    restart: always
+    ports:
+      - 8085:80
+    environment:
+      - PMA_ARBITRARY=1
+    networks:
+      - backend_network
 
 networks:
   backend_network:

@@ -22,7 +22,7 @@ public class MedicalInfoService {
         return medicalInfoRepository.findAll();
     }
 
-    public MedicalInfo getMedicalInfoById(Long id) {
+    public MedicalInfo getMedicalInfoById(Integer id) {
         return medicalInfoRepository.findById(id).orElseThrow(() -> new NotFoundException("No record with that id "));
     }
 
@@ -30,7 +30,7 @@ public class MedicalInfoService {
         return medicalInfoRepository.save(medicalInfo);
     }
 
-    public void updateMedicalInfo(MedicalInfo medicalInfo, Long id){
+    public void updateMedicalInfo(MedicalInfo medicalInfo, Integer id){
         var m = medicalInfoRepository.findById(id).orElseThrow(() -> new NotFoundException("Medical Info not found"));
         m.setId(medicalInfo.getId());
         m.setAllergies(medicalInfo.getAllergies());
@@ -40,27 +40,27 @@ public class MedicalInfoService {
         medicalInfoRepository.save(m);
     }
 
-    public void deleteMedicalInfo(Long id) {
+    public void deleteMedicalInfo(Integer id) {
         var m = medicalInfoRepository.findById(id).orElseThrow(() -> new NotFoundException("Medical Info not found "));
 
         medicalInfoRepository.delete(m);
     }
 
-    public MedicalInfoDto updateBloodType(Long medicalInfoId, String bloodType) {
+    public MedicalInfoDto updateBloodType(Integer medicalInfoId, String bloodType) {
         MedicalInfo medicalInfo = this.getMedicalInfoById(medicalInfoId);
         medicalInfo.setBloodType(BloodType.valueOf(bloodType.toUpperCase()));
         medicalInfoRepository.save(medicalInfo);
         return modelMapper.map(medicalInfo,MedicalInfoDto.class);
     }
 
-    public MedicalInfoDto updateChronicDiseases(Long medicalInfoId, String chronicDiseases) {
+    public MedicalInfoDto updateChronicDiseases(Integer medicalInfoId, String chronicDiseases) {
         MedicalInfo medicalInfo = this.getMedicalInfoById(medicalInfoId);
         medicalInfo.setChronicDiseases(chronicDiseases);
         medicalInfoRepository.save(medicalInfo);
         return modelMapper.map(medicalInfo,MedicalInfoDto.class);
     }
 
-    public MedicalInfoDto updateAllergies(Long medicalInfoId, String allergies) {
+    public MedicalInfoDto updateAllergies(Integer medicalInfoId, String allergies) {
         MedicalInfo medicalInfo = this.getMedicalInfoById(medicalInfoId);
         medicalInfo.setAllergies(allergies);
         medicalInfoRepository.save(medicalInfo);

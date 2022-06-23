@@ -1,6 +1,8 @@
 package com.example.io_backend.model.dto.response;
 
 import com.example.io_backend.dto.UserDto;
+import com.example.io_backend.model.Location;
+import com.example.io_backend.model.dto.LocationDto;
 import com.example.io_backend.model.enums.BloodType;
 import lombok.*;
 
@@ -16,6 +18,7 @@ public class EmergencyResponse {
     private Boolean conscious;
     private BloodType bloodType;
     private LocalDate date;
-    private Long id;
+    private Integer id;
     private UserDto user;
+    private LocationDto location;
 }

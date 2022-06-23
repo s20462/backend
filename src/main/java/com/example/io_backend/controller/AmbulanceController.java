@@ -31,7 +31,7 @@ public class AmbulanceController {
     }
 
     @PostMapping("/{id}/equipment/{eqid}")
-    public ResponseEntity<EquipmentLogResponse> assignEquipment(@PathVariable Integer id, @PathVariable Long eqid) {
+    public ResponseEntity<EquipmentLogResponse> assignEquipment(@PathVariable Integer id, @PathVariable Integer eqid) {
         return ResponseEntity.ok(ambulanceService.assignEquipment(id, eqid));
     }
 

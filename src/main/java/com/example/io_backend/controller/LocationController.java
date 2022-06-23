@@ -20,7 +20,7 @@ public class LocationController {
     }
 
     @GetMapping("/{id}")
-    public Location getById(@PathVariable Long id){
+    public Location getById(@PathVariable Integer id){
         return locationService.getLocationById(id);
     }
 
@@ -30,12 +30,12 @@ public class LocationController {
     }
 
     @PutMapping("/{id}")
-    public void update(@RequestBody Location location,@PathVariable Long id){
+    public void update(@RequestBody Location location,@PathVariable Integer id){
         locationService.updateLocation(location,id);
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable Long id) {
+    public void delete(@PathVariable Integer id) {
         locationService.deleteLocation(id);
     }
 

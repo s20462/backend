@@ -19,7 +19,7 @@ public class TutorialController {
     }
 
     @GetMapping("/{id}")
-    public Tutorial getById(@PathVariable Long id) {
+    public Tutorial getById(@PathVariable Integer id) {
         return tutorialService.getTutorialById(id);
     }
 
@@ -29,12 +29,12 @@ public class TutorialController {
     }
 
     @PutMapping("/{id}")
-    public void update(@RequestBody Tutorial tutorial, @PathVariable Long id){
+    public void update(@RequestBody Tutorial tutorial, @PathVariable Integer id){
         tutorialService.updateTutorial(tutorial,id);
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable Long id){
+    public void delete(@PathVariable Integer id){
         tutorialService.deleteTutorial(id);
     }
 }

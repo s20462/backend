@@ -13,12 +13,12 @@ public class Location {
     @Id
     @Column(name = "id", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
     @Column(name = "longitude")
-    private Double longitude;
+    private String longitude;
 
     @Column(name = "latitude")
-    private Double latitude;
+    private String latitude;
 
 }

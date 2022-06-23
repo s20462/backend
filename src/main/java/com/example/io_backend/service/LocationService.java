@@ -18,7 +18,7 @@ public class LocationService {
         return locationRepository.findAll();
     }
 
-    public Location getLocationById(Long id){
+    public Location getLocationById(Integer id){
         return locationRepository.findById(id).orElseThrow(() -> new NotFoundException("No record with that ID"));
     }
 
@@ -26,7 +26,7 @@ public class LocationService {
         return locationRepository.save(location);
     }
 
-    public void updateLocation(Location location,Long id) {
+    public void updateLocation(Location location,Integer id) {
         var l = locationRepository.findById(id).orElseThrow(() -> new NotFoundException("No record with that ID"));
         l.setId(location.getId());
         l.setLatitude(location.getLatitude());
@@ -35,7 +35,7 @@ public class LocationService {
         locationRepository.save(l);
     }
 
-    public void deleteLocation(Long id) {
+    public void deleteLocation(Integer id) {
         var l = locationRepository.findById(id).orElseThrow(() -> new NotFoundException("No record with that ID"));
         locationRepository.delete(l);
     }

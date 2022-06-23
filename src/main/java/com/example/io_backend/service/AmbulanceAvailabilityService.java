@@ -18,7 +18,7 @@ public class AmbulanceAvailabilityService {
         return ambulanceAvailabilityRepository.findAll();
     }
 
-    public AmbulanceAvailability getAmbulanceAvailabilityById(Long id){
+    public AmbulanceAvailability getAmbulanceAvailabilityById(Integer id){
         return ambulanceAvailabilityRepository.findById(id).orElseThrow(()-> new NotFoundException("No record with that ID"));
     }
 
@@ -26,7 +26,7 @@ public class AmbulanceAvailabilityService {
         return ambulanceAvailabilityRepository.save(ambulanceAvailability);
     }
 
-    public void updateAmbulanceAvailability(AmbulanceAvailability ambulanceAvailability, Long id) {
+    public void updateAmbulanceAvailability(AmbulanceAvailability ambulanceAvailability, Integer id) {
         var a = ambulanceAvailabilityRepository.findById(id).orElseThrow(()-> new NotFoundException("No record with that ID"));
 
         a.setId(ambulanceAvailability.getId());
@@ -39,7 +39,7 @@ public class AmbulanceAvailabilityService {
         ambulanceAvailabilityRepository.save(a);
     }
 
-    public void deleteAmbulanceAvailability(Long id) {
+    public void deleteAmbulanceAvailability(Integer id) {
         var a = ambulanceAvailabilityRepository.findById(id).orElseThrow(()-> new NotFoundException("No record with that ID"));
 
         ambulanceAvailabilityRepository.delete(a);

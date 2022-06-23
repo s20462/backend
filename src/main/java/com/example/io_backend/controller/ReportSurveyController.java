@@ -19,7 +19,7 @@ public class ReportSurveyController {
     }
 
     @GetMapping("/{id}")
-    public ReportSurvey getById(@PathVariable Long id) {
+    public ReportSurvey getById(@PathVariable Integer id) {
         return reportSurveyService.getSurveysReportById(id);
     }
 
@@ -29,12 +29,12 @@ public class ReportSurveyController {
     }
 
     @PutMapping("/{id}")
-    public void update(@RequestBody ReportSurvey reportSurvey, @PathVariable Long id){
+    public void update(@RequestBody ReportSurvey reportSurvey, @PathVariable Integer id){
         reportSurveyService.updateReportSurvey(reportSurvey,id);
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable Long id){
+    public void delete(@PathVariable Integer id){
         reportSurveyService.deleteReportSurvey(id);
     }
 

@@ -18,7 +18,7 @@ public class EquipmentLogService {
         return equipmentLogRepository.findAll();
     }
 
-    public EquipmentLog getEquipmentLogById(Long id) {
+    public EquipmentLog getEquipmentLogById(Integer id) {
         return equipmentLogRepository.findById(id).orElseThrow(() -> new NotFoundException("No record with that Id"));
     }
 
@@ -26,7 +26,7 @@ public class EquipmentLogService {
         return equipmentLogRepository.save(equipmentLog);
     }
 
-    public void updateEquipmentLog(EquipmentLog equipmentLog, Long id){
+    public void updateEquipmentLog(EquipmentLog equipmentLog, Integer id){
         var e = equipmentLogRepository.findById(id).orElseThrow(() -> new NotFoundException("No record with that Id"));
         e.setId(equipmentLog.getId());
         e.setEquipment(equipmentLog.getEquipment());
@@ -40,7 +40,7 @@ public class EquipmentLogService {
         equipmentLogRepository.save(e);
     }
 
-    public void deleteEquipmentLog(Long id){
+    public void deleteEquipmentLog(Integer id){
         var f = equipmentLogRepository.findById(id).orElseThrow(() -> new NotFoundException("No record with that Id"));
         equipmentLogRepository.delete(f);
     }

@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 public class MedicalInfoDto {
-    private Long id;
+    private Integer id;
     private BloodType bloodType;
     private String chronicDiseases;
     private String allergies;

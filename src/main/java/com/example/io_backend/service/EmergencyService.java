@@ -3,6 +3,7 @@ package com.example.io_backend.service;
 import com.example.io_backend.dto.UserDto;
 import com.example.io_backend.exception.BadRequestException;
 import com.example.io_backend.exception.HttpException;
+import com.example.io_backend.exception.InternalServerErrorException;
 import com.example.io_backend.exception.NotFoundException;
 import com.example.io_backend.model.*;
 import com.example.io_backend.model.dto.request.ApproveEmergencyRequest;
@@ -22,6 +23,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -32,16 +34,27 @@ public class EmergencyService {
     private final AmbulanceRepository ambulanceRepository;
     private final UserRepository userRepository;
     private final StaffRepository staffRepository;
+
+    private final LocationRepository locationRepository;
     private final AmbulanceService ambulanceService;
 
     @Transactional
     public EmergencyResponse newEmergency(CreateEmergencyRequest emergencyRequest) {
         ReportSurvey survey = getReportSurvey(emergencyRequest);
-
         survey =  surveyRepository.save(survey);
+
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        log.error(auth.getName());
         User currentUser = userRepository.getById(auth.getName());
+        if (currentUser == null) {
+            throw  new InternalServerErrorException("User is null!");
+        }
+
+        Location location = new Location();
+        location.setId(null);
+        location.setLongitude(emergencyRequest.getLocation().getLongitude());
+        location.setLatitude(emergencyRequest.getLocation().getLatitude());
+
+        location = locationRepository.save(location);
 
         AccidentReport report = new AccidentReport();
         report.setClosed(false);
@@ -51,6 +64,7 @@ public class EmergencyService {
         report.setId(null);
         report.setStaff(null);
         report.setUser(currentUser);
+        report.setLocation(location);
 
         report = accidentRepository.save(report);
 
@@ -66,7 +80,9 @@ public class EmergencyService {
                         .firstName(currentUser.getFirstName())
                         .lastName(currentUser.getLastName())
                         .phone(currentUser.getPhone())
+                        .bandCode(emergencyRequest.getMedicalBandId())
                 .build());
+        response.setLocation(emergencyRequest.getLocation());
 
         return response;
     }
@@ -84,7 +100,7 @@ public class EmergencyService {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         Staff loggedStaff = staffRepository.getByUser_Id(auth.getName());
 
-        AccidentReport report = accidentRepository.findById(id.longValue()).orElseThrow(() -> new NotFoundException("Cannot find accident report with that id"));
+        AccidentReport report = accidentRepository.findById(id).orElseThrow(() -> new NotFoundException("Cannot find accident report with that id"));
         report.setAmbulances(new HashSet<>(ambulances));
         report.setApproved(true);
         report.setDangerRating(request.getDangerRating());
@@ -120,6 +136,12 @@ public class EmergencyService {
         }
 
         return emergencyResponses;
+    }
+
+    public List<EmergencyResponse> getClosed() {
+        List<AccidentReport> accidentReports = accidentRepository.findAll().stream().filter(AccidentReport::getClosed).toList();
+
+        return getEmergencyResponses(accidentReports);
     }
 
     private ReportSurvey getReportSurvey(CreateEmergencyRequest emergencyRequest) {

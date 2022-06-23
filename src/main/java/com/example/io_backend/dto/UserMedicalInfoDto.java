@@ -16,7 +16,7 @@ public class UserMedicalInfoDto {
     private String phone;
     private String bandCode;
     private MedicalInfo medicalInfo;
-    private Long medicalInfoId;
+    private Integer medicalInfoId;
     private BloodType bloodType;
     private String chronicDiseases;
     private String allergies;

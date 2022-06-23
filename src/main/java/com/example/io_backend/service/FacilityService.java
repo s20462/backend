@@ -18,7 +18,7 @@ public class FacilityService {
         return facilityRepository.findAll();
     }
 
-    public Facility getFacilitybyId(Long id) {
+    public Facility getFacilitybyId(Integer id) {
         return facilityRepository.findById(id).orElseThrow(() -> new NotFoundException("No record with that Id"));
     }
 
@@ -26,7 +26,7 @@ public class FacilityService {
         return facilityRepository.save(facility);
     }
 
-    public void updateFacility(Facility facility, Long id){
+    public void updateFacility(Facility facility, Integer id){
         var f = facilityRepository.findById(id).orElseThrow(() -> new NotFoundException("No record with that Id"));
         f.setId(facility.getId());
         f.setFacilityType(facility.getFacilityType());
@@ -38,7 +38,7 @@ public class FacilityService {
         facilityRepository.save(f);
     }
 
-    public void deleteFacility(Long id){
+    public void deleteFacility(Integer id){
         var f = facilityRepository.findById(id).orElseThrow(() -> new NotFoundException("No record with that Id"));
         facilityRepository.delete(f);
     }

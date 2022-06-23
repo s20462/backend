@@ -24,7 +24,7 @@ public class MedicalInfoController {
     }
 
     @GetMapping("/{id}")
-    public MedicalInfo getById(@PathVariable Long id) {
+    public MedicalInfo getById(@PathVariable Integer id) {
         return medicalInfoService.getMedicalInfoById(id);
     }
 
@@ -34,27 +34,27 @@ public class MedicalInfoController {
     }
 
     @PutMapping("/{id}")
-    public void update(@RequestBody MedicalInfo medicalInfo,@PathVariable Long id){
+    public void update(@RequestBody MedicalInfo medicalInfo,@PathVariable Integer id){
          medicalInfoService.updateMedicalInfo(medicalInfo,id);
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable Long id){
+    public void delete(@PathVariable Integer id){
         medicalInfoService.deleteMedicalInfo(id);
     }
 
     @PutMapping("/blood/{id}")
-    public ResponseEntity<MedicalInfoDto> updateBloodtype(@PathVariable Long id, @RequestBody String bloodType) {
+    public ResponseEntity<MedicalInfoDto> updateBloodtype(@PathVariable Integer id, @RequestBody String bloodType) {
         return new ResponseEntity<>(medicalInfoService.updateBloodType(id, bloodType), HttpStatus.OK);
     }
 
     @PutMapping("/chronic/{id}")
-    public ResponseEntity<MedicalInfoDto> updateChronicDisease(@PathVariable Long id,@RequestBody String chronicDisease) {
+    public ResponseEntity<MedicalInfoDto> updateChronicDisease(@PathVariable Integer id,@RequestBody String chronicDisease) {
         return  new ResponseEntity<>(medicalInfoService.updateChronicDiseases(id, chronicDisease),HttpStatus.OK);
     }
 
     @PutMapping("/allergies/{id}")
-    public ResponseEntity<MedicalInfoDto> updateAllergies(@PathVariable Long id,@RequestBody String allergies) {
+    public ResponseEntity<MedicalInfoDto> updateAllergies(@PathVariable Integer id,@RequestBody String allergies) {
         return new ResponseEntity<>(medicalInfoService.updateAllergies(id, allergies),HttpStatus.OK);
     }
 

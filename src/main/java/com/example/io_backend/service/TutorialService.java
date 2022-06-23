@@ -18,7 +18,7 @@ public class TutorialService {
         return tutorialRepository.findAll();
     }
 
-    public Tutorial getTutorialById(Long id) {
+    public Tutorial getTutorialById(Integer id) {
         return tutorialRepository.findById(id).orElseThrow(() -> new NotFoundException("No record with that id"));
     }
 
@@ -26,7 +26,7 @@ public class TutorialService {
         return tutorialRepository.save(tutorial);
     }
 
-    public void updateTutorial(Tutorial tutorial, Long id) {
+    public void updateTutorial(Tutorial tutorial, Integer id) {
         var t = tutorialRepository.findById(id).orElseThrow(() -> new NotFoundException("Tutorial not found"));
         t.setId(tutorial.getId());
         t.setAverage(tutorial.getAverage());
@@ -37,7 +37,7 @@ public class TutorialService {
 
     }
 
-    public void deleteTutorial(Long id) {
+    public void deleteTutorial(Integer id) {
         var t = tutorialRepository.findById(id).orElseThrow(() -> new NotFoundException("Person not found"));
         tutorialRepository.delete(t);
     }

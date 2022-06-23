@@ -17,16 +17,16 @@ public class VictimController {
     public List<Victim> getAll() {return victimService.getVictims();}
 
     @GetMapping("/{id}")
-    public Victim getById(@PathVariable Long id) {return victimService.getVictimById(id);}
+    public Victim getById(@PathVariable Integer id) {return victimService.getVictimById(id);}
 
     @PostMapping("")
     public Victim add(@RequestBody Victim victim) {return victimService.addVictim(victim);}
 
     @PutMapping("/{id}")
-    public void update(@RequestBody Victim victim, @PathVariable Long id ) {victimService.updateVictim(victim,id);}
+    public void update(@RequestBody Victim victim, @PathVariable Integer id ) {victimService.updateVictim(victim,id);}
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable Long id){
+    public void delete(@PathVariable Integer id){
         victimService.deleteVictim(id);
     }
 }

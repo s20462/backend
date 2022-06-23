@@ -18,7 +18,7 @@ public class VictimService {
         return victimRepository.findAll();
     }
 
-    public Victim getVictimById(Long id) {
+    public Victim getVictimById(Integer id) {
         return victimRepository.findById(id).orElseThrow(() -> new NotFoundException("No record with that id"));
     }
 
@@ -26,7 +26,7 @@ public class VictimService {
         return victimRepository.save(victim);
     }
 
-    public void updateVictim(Victim victim, Long id) {
+    public void updateVictim(Victim victim, Integer id) {
         var v = victimRepository.findById(id).orElseThrow(() -> new NotFoundException("Victim Not Found"));
         v.setId(victim.getId());
         v.setDocumentId(victim.getDocumentId());
@@ -38,7 +38,7 @@ public class VictimService {
         victimRepository.save(v);
     }
 
-    public void deleteVictim(Long id) {
+    public void deleteVictim(Integer id) {
         var v = victimRepository.findById(id).orElseThrow(() -> new NotFoundException("Victim Not Found"));
         victimRepository.delete(v);
     }
