@@ -4,9 +4,11 @@ import com.example.io_backend.model.dto.EquipmentDto;
 import com.example.io_backend.model.dto.response.EquipmentResponse;
 import com.example.io_backend.service.EquipmentLogService;
 import com.example.io_backend.service.EquipmentService;
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -32,7 +34,7 @@ public class EquipmentController {
     }
 
     @PutMapping("/{id}")
-    public EquipmentResponse update(@RequestBody EquipmentDto equipment, @PathVariable Long id){
+    public EquipmentResponse update(@Valid @RequestBody EquipmentDto equipment, @PathVariable Long id){
         return equipmentService.updateEquipment(equipment,id);
     }
 

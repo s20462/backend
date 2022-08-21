@@ -1,6 +1,6 @@
 package com.example.io_backend.service;
 
-import com.example.io_backend.dto.UserMedicalInfoDto;
+import com.example.io_backend.model.dto.UserMedicalInfoDto;
 import com.example.io_backend.exception.NotFoundException;
 import com.example.io_backend.model.MedicalInfo;
 import com.example.io_backend.model.User;
@@ -16,11 +16,10 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class UserService {
-
+    private final KeycloakService kcService;
     private final UserRepository userRepository;
     private final MedicalInfoService medicalInfoService;
     private final ModelMapper modelMapper;
-
 
     public List<User> getUsers() {
         return userRepository.findAll();
@@ -28,10 +27,6 @@ public class UserService {
 
     public User getUserById(String userId) {
         return userRepository.findById(userId).orElseThrow(() -> new NotFoundException("No record with that id"));
-    }
-
-    public User addUser(User user) {
-        return userRepository.save(user);
     }
 
     public void updateUser(User user, String userId) {
@@ -49,6 +44,9 @@ public class UserService {
 
     public void deleteUser(String userId) {
         var p = userRepository.findById(userId).orElseThrow(() -> new NotFoundException("Person not found"));
+        try {
+            kcService.deleteUser(p.getId());
+        } catch (Exception ignored){}
         userRepository.delete(p);
     }
 

@@ -24,11 +24,6 @@ public class UserController {
         return userService.getUserById(id);
     }
 
-    @PostMapping("")
-    public User add(@RequestBody User user) {
-        return userService.addUser(user);
-    }
-
     @PutMapping("/{id}")
     public void update(@RequestBody User user, @PathVariable String id) {
         userService.updateUser(user,id);

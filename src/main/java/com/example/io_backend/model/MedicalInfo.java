@@ -28,4 +28,7 @@ public class MedicalInfo {
     @Column(name = "allergies")
     private String allergies;
 
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 }

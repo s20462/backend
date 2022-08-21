@@ -9,8 +9,8 @@ import javax.validation.constraints.NotBlank;
 @Getter
 @Setter
 public class LoginRequest {
-    @NotBlank
+    @NotBlank(message = "username cannot be blank")
     private String username;
-    @NotBlank
+    @NotBlank(message = "password cannot be blank")
     private String password;
 }
