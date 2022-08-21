@@ -11,6 +11,7 @@ import org.hibernate.Hibernate;
 import javax.persistence.*;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -43,6 +44,15 @@ public class Ambulance {
 
     @Column(name = "plates")
     private String plates;
+
+    @OneToMany(mappedBy = "ambulance_id")
+    private Set<EquipmentLog> equipmentLogs;
+
+    @OneToMany(mappedBy = "ambulance_id")
+    private Set<AccidentReport> accidentReports;
+
+    @OneToMany(mappedBy = "ambulance_id")
+    private Set<AmbulanceAvailability> ambulanceAvailabilities;
 
     @Override
     public boolean equals(Object o) {

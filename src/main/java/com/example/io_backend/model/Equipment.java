@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.util.Objects;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -21,16 +22,6 @@ public class Equipment {
     @Column(name = "name")
     private String name;
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Equipment equipment = (Equipment) o;
-        return id.equals(equipment.id) && name.equals(equipment.name);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, name);
-    }
+    @OneToMany(mappedBy = "equipment_id")
+    private Set<EquipmentLog> equipmentLog;
 }

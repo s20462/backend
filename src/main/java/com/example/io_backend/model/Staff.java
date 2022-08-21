@@ -7,6 +7,7 @@ import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -31,4 +32,9 @@ public class Staff {
     @Enumerated(EnumType.ORDINAL)
     private StaffType staffType;
 
+    @OneToMany(mappedBy = "staff_id")
+    private Set<DispositorDutyEntry> dispositorDutyEntries;
+
+    @OneToMany(mappedBy = "staff_id")
+    private Set<AccidentReport> accidentReports;
 }
