@@ -188,6 +188,12 @@ public class KeycloakService {
         keycloakRestTemplate.delete(URL);
     }
 
+    public void deleteUser(String id) {
+        String URL = BASE_URL + KeycloakApiConstants.DELETE_USER.replace("{REALM}", REALM);
+        URL = URL.replace("{USER_ID}", id);
+        keycloakRestTemplate.delete(URL);
+    }
+
     public String loginUser(LoginRequest loginRequest) {
         return keycloakRestTemplate.postForAccessToken(loginRequest);
     }
